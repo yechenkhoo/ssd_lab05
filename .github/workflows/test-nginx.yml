@@ -1,0 +1,47 @@
+name: Test Nginx Proxy - HTTP
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-nginx:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Test Docker Compose Syntax
+      run: |
+        docker-compose -f nginx-compose.yml config
+    
+    - name: Start Nginx Service
+      run: |
+        docker-compose -f nginx-compose.yml up -d
+        sleep 10
+    
+    - name: Test HTTP Response
+      run: |
+        response=$(curl -s http://localhost/)
+        echo "Response: $response"
+        if [[ $response == *"Hello World"* ]]; then
+          echo "✅ HTTP test passed - Found expected content"
+        else
+          echo "❌ HTTP test failed - Expected content not found"
+          exit 1
+        fi
+    
+    - name: Test Nginx Configuration
+      run: |
+        docker-compose exec -T nginx nginx -t
+        echo "✅ Nginx configuration test passed"
+    
+    - name: Cleanup
+      run: |
+        docker-compose down
+        echo "✅ Cleanup completed"
