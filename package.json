@@ -1,0 +1,26 @@
+{
+  "name": "ssd_lab05",
+  "version": "1.0.0",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yechenkhoo/ssd_lab05.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yechenkhoo/ssd_lab05/issues"
+  },
+  "homepage": "https://github.com/yechenkhoo/ssd_lab05#readme",
+  "description": "",
+  "devDependencies": {
+    "@microsoft/eslint-formatter-sarif": "^3.1.0",
+    "eslint": "^9.31.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-security": "^3.0.1"
+  }
+}
